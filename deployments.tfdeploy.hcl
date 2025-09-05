@@ -11,7 +11,7 @@ identity_token "k8s" {
 }
 
 deployment "development" {
-  deployment_group = deployment_group.dev_group
+  #deployment_group = deployment_group.dev_group
 
   inputs = {
     aws_identity_token      = identity_token.aws.jwt
