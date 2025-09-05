@@ -31,7 +31,7 @@ deployment "development" {
   }
 }
 
-deployment "prod" {
+/*deployment "prod" {
   inputs = {
     aws_identity_token        = identity_token.aws.jwt
     role_arn                  = "arn:aws:iam::177099687113:role/tfstacks-role"
@@ -49,7 +49,7 @@ deployment "prod" {
     namespace                 = "hashibank"
   }
   deployment_group = deployment_group.prod_group
-}
+}*/
 
 
 
