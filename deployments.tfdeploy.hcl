@@ -11,7 +11,7 @@ identity_token "k8s" {
 }
 
 deployment "development" {
-  #deployment_group = deployment_group.dev_group
+  deployment_group = deployment_group.dev_group
 
   inputs = {
     aws_identity_token      = identity_token.aws.jwt
@@ -31,7 +31,7 @@ deployment "development" {
   }
 }
 
-/*deployment "prod" {
+deployment "prod" {
   inputs = {
     aws_identity_token        = identity_token.aws.jwt
     role_arn                  = "arn:aws:iam::177099687113:role/tfstacks-role"
@@ -49,7 +49,7 @@ deployment "development" {
     namespace                 = "hashibank"
   }
   deployment_group = deployment_group.prod_group
-}*/
+}
 
 
 
