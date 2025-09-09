@@ -85,11 +85,4 @@ deployment "prod" {
   }
 }
 
-# ----------------------------------------------------
-# Step 5: Define Published Outputs for Linked Stacks
-# ----------------------------------------------------
-publish_output "vpc_id" {
-  # This makes the VPC ID from the 'development' deployment available to other stacks.
-  value = component.vpc["us-east-1"].vpc_id
-}
 
