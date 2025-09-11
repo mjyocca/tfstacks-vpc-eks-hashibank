@@ -83,6 +83,14 @@ deployment "prod" {
     k8s_identity_token        = identity_token.k8s.jwt
     namespace                 = "hashibank"
   }
+  # ----------------------------------------------------
+# FIX #1: Add this new output block at the bottom.
+# This formally exposes the VPC ID from the component to the top-level stack.
+# ----------------------------------------------------
+output "published_vpc_id" {
+  description = "The ID of the VPC from the first region's deployment."
+  value       = component.vpc["us-east-1"].vpc_id
+}
 }
 
 
