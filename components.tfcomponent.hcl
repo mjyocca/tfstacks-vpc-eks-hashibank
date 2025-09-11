@@ -116,7 +116,7 @@ component "deploy-hashibank" {
 # FIX #2: Add this new block to publish the output.
 # It now correctly references the top-level output we created in the component file.
 # ----------------------------------------------------
-publish_output "vpc_id" {
+/*publish_output "vpc_id" {
   value = output.published_vpc_id
-}
+}*/
 }

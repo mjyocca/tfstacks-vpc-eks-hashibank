@@ -43,6 +43,7 @@ deployment_group "prod_group" {
 # ----------------------------------------------------
 deployment "development" {
   # Assign this deployment to the 'dev_group'.
+  destroy = true
   deployment_group = deployment_group.dev_group
 
   inputs = {
@@ -66,6 +67,7 @@ deployment "development" {
 deployment "prod" {
   # Assign this deployment to the 'prod_group'.
   deployment_group = deployment_group.prod_group
+  destroy = true
 
   inputs = {
     aws_identity_token        = identity_token.aws.jwt
@@ -87,10 +89,10 @@ deployment "prod" {
 # FIX #1: Add this new output block at the bottom.
 # This formally exposes the VPC ID from the component to the top-level stack.
 # ----------------------------------------------------
-output "published_vpc_id" {
+/*output "published_vpc_id" {
   description = "The ID of the VPC from the first region's deployment."
   value       = component.vpc["us-east-1"].vpc_id
-}
+}*/
 }
 
 
