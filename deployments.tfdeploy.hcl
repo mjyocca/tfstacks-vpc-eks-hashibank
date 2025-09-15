@@ -72,25 +72,24 @@ deployment "prod" {
     aws_identity_token        = identity_token.aws.jwt
     role_arn                  = "arn:aws:iam::177099687113:role/tfstacks-role"
     regions                   = ["us-east-1"]
-    vpc_name                  = "vearadyn-prod"
+    vpc_name                  = "elyndara-prod"
     vpc_cidr                  = "10.20.0.0/16"
     kubernetes_version        = "1.30"
-    cluster_name              = "vearadyn-eksprod01"
+    cluster_name              = "elyndara-eksprod01"
     tfc_kubernetes_audience   = "k8s.workload.identity"
     tfc_hostname              = "https://app.terraform.io"
-    tfc_organization_name     = "vearadyn" # Note: You may want this to be Elyndara as well
+    tfc_organization_name     = "elyndara" # Note: You may want this to be Elyndara as well
     eks_clusteradmin_arn      = "arn:aws:iam::855831148133:role/aws_jacob.plicque_test-developer"
     eks_clusteradmin_username = "aws_jacob.plicque_test-developer"
     k8s_identity_token        = identity_token.k8s.jwt
     namespace                 = "hashibank"
   }
   # ----------------------------------------------------
-# FIX #1: Add this new output block at the bottom.
-# This formally exposes the VPC ID from the component to the top-level stack.
+# Commenting out the upstream input and publish output for this test
 # ----------------------------------------------------
-publish_output "vpc_id" {
+/*publish_output "vpc_id" {
   value = output.published_vpc_id
 }
-}
+}*/
 
 
