@@ -37,11 +37,6 @@ deployment_group "prod_group" {
   # The prod group has no rules, so it will always require manual approval.
   auto_approve_checks = []
 }
-# This is the key change. The publish_output block now sits at the top level,
-# outside of any deployment blocks.
-publish_output "vpc_id" {
-  value = output.published_vpc_id
-}
 # ----------------------------------------------------
 # Step 4: Define Deployments and Assign Them to Groups
 # ----------------------------------------------------
@@ -70,8 +65,6 @@ deployment "development" {
 deployment "prod" {
   # Assign this deployment to the 'prod_group'.
   deployment_group = deployment_group.prod_group
-  destroy = true
-
   inputs = {
     aws_identity_token        = identity_token.aws.jwt
     role_arn                  = "arn:aws:iam::177099687113:role/tfstacks-role"
