@@ -37,14 +37,18 @@ deployment_group "prod_group" {
   # The prod group has no rules, so it will always require manual approval.
   auto_approve_checks = []
 }
-
+# This is the key change. The publish_output block now sits at the top level,
+# outside of any deployment blocks.
+publish_output "vpc_id" {
+  value = output.published_vpc_id
+}
 # ----------------------------------------------------
 # Step 4: Define Deployments and Assign Them to Groups
 # ----------------------------------------------------
 deployment "development" {
   # Assign this deployment to the 'dev_group'.
   deployment_group = deployment_group.dev_group
-
+  destroy = true
   inputs = {
     aws_identity_token        = identity_token.aws.jwt
     role_arn                  = "arn:aws:iam::177099687113:role/tfstacks-role"
@@ -78,18 +82,13 @@ deployment "prod" {
     cluster_name              = "elyndara-eksprod01"
     tfc_kubernetes_audience   = "k8s.workload.identity"
     tfc_hostname              = "https://app.terraform.io"
-    tfc_organization_name     = "elyndara" # Note: You may want this to be Elyndara as well
+    tfc_organization_name     = "elyndara"
     eks_clusteradmin_arn      = "arn:aws:iam::855831148133:role/aws_jacob.plicque_test-developer"
     eks_clusteradmin_username = "aws_jacob.plicque_test-developer"
     k8s_identity_token        = identity_token.k8s.jwt
     namespace                 = "hashibank"
   }
-  # ----------------------------------------------------
-# Commenting out the upstream input and publish output for this test
-# ----------------------------------------------------
-/*publish_output "vpc_id" {
-  value = output.published_vpc_id
-}*/
 }
+
 
 
