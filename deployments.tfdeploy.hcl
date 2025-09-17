@@ -81,9 +81,6 @@ deployment "prod" {
     namespace                 = "hashibank"
   }
 }
-publish_output "vpc_id" {
-  value = deployment.development.published_vpc_id
-}
 
 
 
