@@ -37,6 +37,7 @@ deployment_group "prod_group" {
   # The prod group has no rules, so it will always require manual approval.
   auto_approve_checks = []
 }
+
 # ----------------------------------------------------
 # Step 4: Define Deployments and Assign Them to Groups
 # ----------------------------------------------------
@@ -68,13 +69,13 @@ deployment "prod" {
     aws_identity_token        = identity_token.aws.jwt
     role_arn                  = "arn:aws:iam::177099687113:role/tfstacks-role"
     regions                   = ["us-east-1"]
-    vpc_name                  = "elyndara-prod"
+    vpc_name                  = "vearadyn-prod"
     vpc_cidr                  = "10.20.0.0/16"
     kubernetes_version        = "1.30"
-    cluster_name              = "elyndara-eksprod01"
+    cluster_name              = "vearadyn-eksprod01"
     tfc_kubernetes_audience   = "k8s.workload.identity"
     tfc_hostname              = "https://app.terraform.io"
-    tfc_organization_name     = "elyndara"
+    tfc_organization_name     = "vearadyn"
     eks_clusteradmin_arn      = "arn:aws:iam::855831148133:role/aws_jacob.plicque_test-developer"
     eks_clusteradmin_username = "aws_jacob.plicque_test-developer"
     k8s_identity_token        = identity_token.k8s.jwt
@@ -82,5 +83,14 @@ deployment "prod" {
   }
 }
 
-
+# ----------------------------------------------------
+# Step 5: Publish Outputs (Optional for Linked Stacks)
+# ----------------------------------------------------
+# Note: This block is currently erroring out because the Linked Stacks
+# feature may not be fully deployed in the GA environment yet.
+# We are keeping it commented out for now.
+#
+# publish_output "vpc_id" {
+#   value = output.published_vpc_id
+# }
 
