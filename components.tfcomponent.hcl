@@ -1,3 +1,5 @@
+# This file defines the "what" - the building blocks of our stack.
+
 #AWS VPC
 component "vpc" {
   for_each = var.regions
@@ -113,3 +115,12 @@ component "deploy-hashibank" {
     time = provider.time.this
   }
 }
+
+# This is the new, critical block. It formally exposes the VPC ID
+# from the 'vpc' component as a top-level Stack output.
+# Still commented out for now.
+/*output "published_vpc_id" {
+  description = "The ID of the VPC from the development deployment."
+  value       = component.vpc["us-east-1"].vpc_id
+}*/
+
